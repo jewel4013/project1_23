@@ -50,6 +50,12 @@
                             @endif
                         @else
                             <li class="nav-item">
+                                <a href="#" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Others1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/posts" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Posts</a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="/catagories" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Categories</a>
                             </li>
                             <li class="nav-item dropdown">

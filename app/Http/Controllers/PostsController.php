@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catagory;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class CatagoriesController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class CatagoriesController extends Controller
      */
     public function index()
     {
-        return view('catagories.index', [
-            'catagories' => Catagory::all(),
+        return view('posts.index', [
+            'postall' => Post::all(),
         ]);
     }
 
@@ -26,7 +27,9 @@ class CatagoriesController extends Controller
      */
     public function create()
     {
-        return view('catagories.create');
+        return view('posts.create', [
+            'catagories' => Catagory::all(),
+        ]);
     }
 
     /**
@@ -37,14 +40,19 @@ class CatagoriesController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'name' => 'required|min:2|max:100',
-            'description' => 'required|min:5',
+        $validate_data = request()->validate([
+            'title' => 'required|min:3|max:100',
+            'body' => 'required|min:5',
+            'thumbnail' => 'required',
+            'status' => '',
+            'catagory_id' => 'required|exists:catagories,id',
+            'user_id' => '',
         ]);
 
-        Catagory::create(request()->except('_token'));
+        //dd($validate_data);
+        Post::create($validate_data);
 
-        return redirect('/catagories')->with('successdismiss', 'Create a new Catagory successfully.');
+        return redirect(url('/posts'))->with('successdismiss', 'Post upload succesfully');
     }
 
     /**
@@ -66,9 +74,7 @@ class CatagoriesController extends Controller
      */
     public function edit($id)
     {
-        return view('catagories.edit', [
-            'catagory' => Catagory::find($id),
-        ]);
+        return view('posts.edit');
     }
 
     /**
@@ -80,15 +86,7 @@ class CatagoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        request()->validate([
-            'name' => 'required|min:2|max:100',
-            'description' => 'required|min:5',
-        ]);
-
-        $catagory = Catagory::find($id);
-        $catagory->update(request()->except('_token'));
-
-        return redirect(url('/catagories'))->with('successdismiss', 'Catagory update successfull.');
+        //
     }
 
     /**
@@ -99,7 +97,6 @@ class CatagoriesController extends Controller
      */
     public function destroy($id)
     {
-        Catagory::find($id)->delete();
-        return redirect(url('/catagories'))->with('successdismiss', 'Catagory delete successfull.');
+        //
     }
 }

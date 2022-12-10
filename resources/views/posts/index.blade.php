@@ -7,25 +7,27 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <p>{{ __('Catagories List') }}</p>
-                    <p><a href="/catagories/create" class="">Create a new one</a></p>
+                    <p>{{ __('Post List') }}</p>
+                    <p><a href="/posts/create" class="">Create a new one</a></p>
                 </div>
                 <div class="card-body">
                     @include('partials.successdismiss')
-                    <table class="table">
+                    {{-- <table class="table">
                         <tr>
                             <th>Id</th>
-                            <th>Name</th>
-                            <th>Desctiption</th>
+                            <th>Title</th>
+                            <th>Created_at</th>
+                            <th>User</th>
                             <th>Action</th>
                         </tr>
-                        @foreach ($catagories as $catagory)
+                        @foreach ($postall as $post)
                             <tr>
-                                <td>{{$catagory->id}}</td>
-                                <td>{{$catagory->name}}</td>
-                                <td>{{$catagory->description}}</td>
+                                <td>{{$post->id}}</td>
+                                <td>{{$post->title}}</td>
+                                <td>{{$post->created_at}}</td>
+                                <td>{{$post->user_id}}</td>
                                 <td>
-                                    <a href="/catagories/{{$catagory->id}}/edit" class="btn btn-warning">Edit</a>    
+                                    <a href="/posts/{{$post->id}}/edit" class="btn btn-warning">Edit</a>    
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">Delete</button>
                                      
                                       <!-- The Modal -->
@@ -46,7 +48,7 @@
                                       
                                             <!-- Modal footer -->
                                             <div class="modal-footer d-flex justify-content-between">
-                                                <form action="/catagories/{{$catagory->id}}" method="POST" class="d-inline-block">
+                                                <form action="/posts/{{$post->id}}" method="POST" class="d-inline-block">
                                                     @csrf
                                                     @method('delete')
                                                     <button class="btn btn-danger ">Yes, Delete</button>    
@@ -61,7 +63,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </table>
+                    </table> --}}
                 </div>
             </div>
         </div>
