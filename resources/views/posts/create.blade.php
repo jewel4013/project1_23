@@ -10,7 +10,7 @@
 
 
                 <div class="card-body">
-                    <form method="POST" action="/posts">
+                    <form action="/posts" method="POST">
                         @csrf
 
 

@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     @include('partials.successdismiss')
-                    {{-- <table class="table">
+                    <table class="table">
                         <tr>
                             <th>Id</th>
                             <th>Title</th>
@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{$post->id}}</td>
                                 <td>{{$post->title}}</td>
-                                <td>{{$post->created_at}}</td>
+                                <td>{{$post->created_at->diffForHumans()}}</td>
                                 <td>{{$post->user_id}}</td>
                                 <td>
                                     <a href="/posts/{{$post->id}}/edit" class="btn btn-warning">Edit</a>    
@@ -63,7 +63,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </table> --}}
+                    </table>
                 </div>
             </div>
         </div>

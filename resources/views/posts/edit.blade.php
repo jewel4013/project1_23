@@ -5,20 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Catagories Update') }}</div>
+                <div class="card-header">{{ __('Posts Update') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/catagories/{{$catagory->id}}">
+                    <form action="/posts/{{$post->id}}" method="POST">
                         @csrf
                         @method('put')
 
+
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
+                            <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Post Title') }}</label>
                             <div class="col-md-6">
-                                <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ? old('name') : $catagory->name }}">
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') ? old('title') : $post->title }}">
 
-                                @error('name')
+                                @error('title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -26,21 +26,44 @@
                             </div>
                         </div>
 
+
                         <div class="row mb-3">
-                            <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Description') }}</label>
-
+                            <label for="catagory" class="col-md-4 col-form-label text-md-end">{{ __('Catagories') }}</label>
                             <div class="col-md-6">
-                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" cols="5" role="3">{{ old('description') ? old('description') : $catagory->description }}</textarea>
+                                <select id="catagory" class="form-control @error('catagory_id') is-invalid @enderror" name="catagory_id">
+                                    <option>Select catagory</option>
+                                    @foreach ($catagories as $catagory)
+                                        <option value="{{$catagory->id}}" {{$post->catagory_id == $catagory->id ? 'selected' : ''}}>{{$catagory->name}}</option>
+                                    @endforeach                                
+                                </select>
 
-                                @error('description')
+                                @error('catagory_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-                        <div class=" mb-3 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-info px-5">Submit</button>
+
+
+                        <div class="row mb-3">
+                            <label for="body" class="col-md-4 col-form-label text-md-end">{{ __('Post Body') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="body" class="form-control @error('body') is-invalid @enderror" name="body" cols="5" role="3">{{ old('body') ? old('body') : $post->body}}</textarea>
+                                @error('body')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row mb-3">
+                            <div class="col-md-4"></div>
+                            <button type="submit" class="btn btn-info col-md-6">Update</button>
                         </div>
 
                     </form>

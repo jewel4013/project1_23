@@ -43,13 +43,10 @@ class PostsController extends Controller
         $validate_data = request()->validate([
             'title' => 'required|min:3|max:100',
             'body' => 'required|min:5',
-            'thumbnail' => 'required',
-            'status' => '',
             'catagory_id' => 'required|exists:catagories,id',
-            'user_id' => '',
         ]);
 
-        //dd($validate_data);
+        // dd($validate_data);
         Post::create($validate_data);
 
         return redirect(url('/posts'))->with('successdismiss', 'Post upload succesfully');
@@ -74,7 +71,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        return view('posts.edit');
+        return view('posts.edit', [
+            'post' => Post::find($id),
+            'catagories' => Catagory::all(),
+        ]);
     }
 
     /**
@@ -86,7 +86,15 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate_data = request()->validate([
+            'title' => 'required|min:3|max:100',
+            'body' => 'required|min:5',
+            'catagory_id' => 'required|exists:catagories,id',
+        ]);
+
+        Post::find($id)->update($validate_data);
+
+        return redirect(url('/posts'))->with('successdismiss', 'Post Update successful....okh!');
     }
 
     /**
