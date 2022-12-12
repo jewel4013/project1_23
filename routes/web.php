@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CatagoriesController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/catagories', CatagoriesController::class)->middleware('auth');
 Route::resource('/posts', PostsController::class);
+Route::resource('/tags', TagController::class);
 
 
 
