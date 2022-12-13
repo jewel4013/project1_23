@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Catagory;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -29,6 +30,7 @@ class PostsController extends Controller
     {
         return view('posts.create', [
             'catagories' => Catagory::all(),
+            'tags' => Tag::all(),
         ]);
     }
 

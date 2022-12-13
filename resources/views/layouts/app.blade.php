@@ -50,7 +50,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="#" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Others1</a>
+                                <a href="/tags" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Tags</a>
                             </li>
                             <li class="nav-item">
                                 <a href="/posts" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Posts</a>

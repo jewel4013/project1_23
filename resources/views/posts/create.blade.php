@@ -48,6 +48,25 @@
 
 
                         <div class="row mb-3">
+                            <label for="tags" class="col-md-4 col-form-label text-md-end">{{ __('Tags') }}</label>
+                            <div class="col-md-6">
+                                <select id="tags" class="form-control @error('tags') is-invalid @enderror" name="tags">
+                                    <option>Select Tag</option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                    @endforeach                                
+                                </select>
+
+                                @error('tags')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
                             <label for="body" class="col-md-4 col-form-label text-md-end">{{ __('Post Body') }}</label>
                             <div class="col-md-6">
                                 <textarea id="body" class="form-control @error('body') is-invalid @enderror" name="body" cols="5" role="3">{{ old('body') }}</textarea>
