@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catagory;
+use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class PageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('tags.index', [
+        return view('welcome', [
+            'posts' => Post::all(),
+            'catagories' => Catagory::all(),
             'tags' => Tag::all(),
         ]);
     }
@@ -26,7 +30,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        //
     }
 
     /**
@@ -37,14 +41,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $valid_data = $request->validate([
-            'name' => 'required|unique:tags|min:1|max:100',
-            'description' => '',
-        ]);
-
-        Tag::create($valid_data);
-
-        return redirect(url('/tags'))->with('successdismiss', 'Tag create successful.');
+        //
     }
 
     /**
@@ -66,9 +63,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        return view('tags.edit', [
-            'tag' => Tag::find($id),
-        ]);
+        //
     }
 
     /**
@@ -80,14 +75,7 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $valid_data = $request->validate([
-            'name' => 'required|unique:tags,id|min:1|max:100',
-            'description' => '',
-        ]);
-
-        Tag::find($id)->update($valid_data);
-
-        return redirect(url('/tags'))->with('successdismiss', 'Tag Update successful.');
+        //
     }
 
     /**
@@ -96,12 +84,8 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        dd($tag->id);
-
-        //$tag->delete();
-
-        return redirect(url('/tags'))->with('successdismiss', 'Tag Delete successful.');
+        //
     }
 }

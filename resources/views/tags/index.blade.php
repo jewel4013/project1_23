@@ -26,6 +26,14 @@
                                 <td>{{$tag->description}}</td>
                                 <td>
                                     <a href="/tags/{{$tag->id}}/edit" class="btn btn-warning">Edit</a>    
+                                    {{-- <form action="/tags/{{$tag->id}}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Yes, Delete</button>    
+                                    </form> --}}
+
+
+
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">Delete</button>
                                     <!-- The Modal -->
                                     <div class="modal" id="myModal">

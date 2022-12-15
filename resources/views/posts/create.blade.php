@@ -48,16 +48,16 @@
 
 
                         <div class="row mb-3">
-                            <label for="tags" class="col-md-4 col-form-label text-md-end">{{ __('Tags') }}</label>
+                            <label for="tag_id" class="col-md-4 col-form-label text-md-end">{{ __('Tags') }}</label>
                             <div class="col-md-6">
-                                <select id="tags" class="form-control @error('tags') is-invalid @enderror" name="tags">
+                                <select id="tag_id" class="form-control @error('tag_id') is-invalid @enderror" name="tag_id[]" multiple>
                                     <option>Select Tag</option>
                                     @foreach ($tags as $tag)
                                         <option value="{{$tag->id}}">{{$tag->name}}</option>
                                     @endforeach                                
                                 </select>
 
-                                @error('tags')
+                                @error('tag_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

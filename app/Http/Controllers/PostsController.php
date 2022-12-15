@@ -46,11 +46,13 @@ class PostsController extends Controller
             'title' => 'required|min:3|max:100',
             'body' => 'required|min:5',
             'catagory_id' => 'required|exists:catagories,id',
+            'tag_id' => 'exists:tags,id',
         ]);
 
-        // dd($validate_data);
-        Post::create($validate_data);
-
+        $tags = request('tag_id');
+        $tag = Tag::find($tags);
+        $post = Post::create(request()->except('_token', 'tag_id'));
+        $post->tags()->attach($tag);
         return redirect(url('/posts'))->with('successdismiss', 'Post upload succesfully');
     }
 
@@ -76,6 +78,7 @@ class PostsController extends Controller
         return view('posts.edit', [
             'post' => Post::find($id),
             'catagories' => Catagory::all(),
+            'tags' => Tag::all(),
         ]);
     }
 
@@ -92,10 +95,15 @@ class PostsController extends Controller
             'title' => 'required|min:3|max:100',
             'body' => 'required|min:5',
             'catagory_id' => 'required|exists:catagories,id',
+            'tag_id' => 'exists:tags,id',
         ]);
+        $tags = request('tag_id');
+        $tag = Tag::find($tags);
 
-        Post::find($id)->update($validate_data);
+        $post = Post::find($id);
+        $post->update(request()->except('_token', 'tag_id'));
 
+        $post->tags()->sync($tag);
         return redirect(url('/posts'))->with('successdismiss', 'Post Update successful....okh!');
     }
 

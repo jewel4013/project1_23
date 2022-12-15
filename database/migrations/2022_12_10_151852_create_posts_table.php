@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table){
             $table->id('id');
             $table->string('title');
             $table->text('body');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable();
             $table->integer('status')->default(0);
             $table->unsignedBigInteger('catagory_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();

@@ -10,4 +10,8 @@ class Post extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function tags(){
+        return $this->belongsToMany('App\Models\Tag');
+    }
 }
