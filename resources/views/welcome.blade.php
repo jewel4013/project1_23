@@ -21,17 +21,38 @@
         </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-5">
             @foreach ($posts as $post)    
                 <div class="card mb-3">
-                    <div class="card-header">
-                        <img src="{{$post->thumbnail_path()}}" alt="Thumbnail Photo" width="40" height="40" style="" class="rounded-circle">
-                        <a class="m-0">{{$post->title}}</a>
-                        <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
+                    <div class="card-header d-flex align-items-center">
+                        <div class="">
+                            <img src="{{$post->thumbnail_path()}}" alt="Thumbnail Photo" width="40" height="40" style="" class="rounded-circle">
+                        </div>
+                        <div class="d-flex flex-column" style="margin-left: 10px">
+                            <a class="m-0 text-decoration-none" href="#" style="font-size:22px">{{$post->title}}</a>
+                            <span class="m-0" style="font-size: 11px">{{$post->created_at->diffForHumans()}}</span>
+                        </div>
                     </div>
-                    <div class="card m-2">
+                    <div class="card-body">
                         <p>{{$post->body}}</p>
+                        {{-- <div class="">
+                            <img src="{{$post->thumbnail_path()}}" alt="Thumbnail Photo" width="400" height="400">
+                        </div> --}}
                     </div>
+                    {{-- <div class="card-footer d-flex">
+                        <div class="">
+                            <button class="btn p-0 mx-1">
+                                <i class="fa-solid fa-thumbs-up" style="font-size: 20px"></i>
+                                <span>5</span>
+                            </button>
+                        </div>
+                        <div class="mx-4">
+                            <button class="btn p-0 mx-1" >
+                                <i class="fa-solid fa-thumbs-down" style="font-size: 20px"></i>
+                                <span>1</span>
+                            </button>
+                        </div>
+                    </div> --}}
                 </div>
             @endforeach
         </div>
