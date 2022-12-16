@@ -22,17 +22,18 @@
 
 
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h4 class="m-0">{{ __('Post') }}</h4>
-                </div>
-                @foreach ($posts as $post)    
+            @foreach ($posts as $post)    
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <img src="{{$post->thumbnail_path()}}" alt="Thumbnail Photo" width="40" height="40" style="" class="rounded-circle">
+                        <a class="m-0">{{$post->title}}</a>
+                        <p class="m-0">{{$post->created_at->diffForHumans()}}</p>
+                    </div>
                     <div class="card m-2">
-                        <h5>{{$post->title}}</h5>
                         <p>{{$post->body}}</p>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
 
         <div class="col-md-3">

@@ -14,4 +14,8 @@ class Post extends Model
     public function tags(){
         return $this->belongsToMany('App\Models\Tag');
     }
+
+    public function thumbnail_path(){
+        return "images/post/$this->thumbnail";
+    }
 }

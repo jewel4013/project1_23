@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Posts Update') }}</div>
 
                 <div class="card-body">
-                    <form action="/posts/{{$post->id}}" method="POST">
+                    <form action="/posts/{{$post->id}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
 
@@ -74,6 +74,22 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="thumbnail" class="col-md-4 col-form-label text-md-end">{{ __('Thumbnail') }}</label>
+                            <div class="col-md-6">
+                                <input id="thumbnail" type="file" class="form-control @error('thumbnail') is-invalid @enderror" name="thumbnail" value="{{ old('thumbnail') }}">
+                                
+                                @error('thumbnail')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                                <img src="{{asset('/images/post/'.$post->thumbnail)}}" alt="Thumbnail Image" style="width:100px; height:100px" class="">
                             </div>
                         </div>
 
