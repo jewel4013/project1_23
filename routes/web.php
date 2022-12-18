@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CatagoriesController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TagController;
@@ -26,4 +27,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/catagories', CatagoriesController::class)->middleware('auth');
 Route::resource('/posts', PostsController::class);
+Route::post('/posts/{id}/comments', [CommentsController::class, 'store']);
 Route::resource('/tags', TagController::class);
+

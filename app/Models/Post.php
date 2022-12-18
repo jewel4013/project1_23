@@ -16,6 +16,11 @@ class Post extends Model
     }
 
     public function thumbnail_path(){
-        return "images/post/$this->thumbnail";
+        return asset("images/post/$this->thumbnail");
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
     }
 }

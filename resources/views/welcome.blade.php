@@ -28,12 +28,12 @@
                             <img src="{{$post->thumbnail_path()}}" alt="Thumbnail Photo" width="40" height="40" style="" class="rounded-circle">
                         </div>
                         <div class="d-flex flex-column" style="margin-left: 10px">
-                            <a class="m-0 text-decoration-none" href="#" style="font-size:22px">{{$post->title}}</a>
-                            <span class="m-0" style="font-size: 11px">{{$post->created_at->diffForHumans()}}</span>
+                            <a href="/posts/{{$post->id}}" class="m-0 text-decoration-none" style="font-size:22px">{{$post->title}}</a>
+                            <span class="m-0" style="font-size: 12px">{{$post->created_at->diffForHumans()}}</span>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>{{$post->body}}</p>
+                        <p class="m-0 p-0">{{Str::limit($post->body, '100', '...')}}</p>
                         {{-- <div class="">
                             <img src="{{$post->thumbnail_path()}}" alt="Thumbnail Photo" width="400" height="400">
                         </div> --}}
