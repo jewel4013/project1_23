@@ -33,19 +33,19 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Post $post)
+    public function store(Request $request, $id)
     {
         request()->validate([
-            'comment_body' => 'required|min:3',
-        ]);
-        
-        $post->comments()->create([
-            'comment_body' => request('comment_body'),
-            'user_id' => 1,
+            'comment_body' => 'required|min:3'
         ]);
 
-        return back();
-        
+        $post = Post::find($id);
+        $post->comments()->create([
+            'comment_body' => request('comment_body'),
+            'user_id' => auth()->id(),
+        ]);
+
+        return back()->with('successdismiss', 'Comment success!');
     }
 
     /**

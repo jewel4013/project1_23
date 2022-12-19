@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'profile_pic' => ['required', 'image', 'mimes:jpg,jpeg,png'],
         ]);
     }
 
@@ -69,5 +70,15 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+                                                        // if(request()->hasFile('profile_pic')){
+                                                        //     $ext = request()->file('profile_pic')->getClientOriginalExtension();
+                                                        //     $file_name = $user->id.'.'.$ext;
+                                                        //     request()->file('profile_pic')->move('images/profile_pic', $file_name);
+                                                        //     $user->update([
+                                                        //         'profile_pic' => $file_name,
+                                                        //     ]);
+                                                        // }
+
     }
 }

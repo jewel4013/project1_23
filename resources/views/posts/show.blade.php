@@ -7,7 +7,7 @@
         
 
 
-
+        
 
         <div class="col-md-8">       
             <div class="card mb-3">
@@ -45,6 +45,7 @@
                     <a href="" class="btn btn-info btn-sm">Like</a>
                 </div>
                 <div class="container">
+                    @include('partials.successdismiss')
                     <h3 class="m-0">Comment</h3>
                     <form action="/posts/{{$post->id}}/comments" method="POST">
                         @csrf
@@ -64,11 +65,17 @@
             </div>
 
 
-            <div class="card">
-                <div class="card-body">
-                    
+            @foreach ($post->comments as $comment)
+                <div class="card mb-2">
+                    <div class="p-3">
+                        <p class="m-0 p-0" style="font-size: 18px">{{$comment->woner->name}}</p>
+                        <p class="m-0 p-0" style="font-size: 10px">{{$comment->created_at->diffForHumans()}}</p>
+                    </div>
+                    <div class="card-body">
+                        {{$comment->comment_body}}
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
 
