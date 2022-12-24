@@ -9,7 +9,7 @@
 
         
 
-        <div class="col-md-8">       
+        <div class="col-md-6">       
             <div class="card mb-3">
                 <div class="card-header d-flex align-items-start">
                     <div class="">
@@ -40,12 +40,37 @@
                         </button>
                     </div>
                 </div> --}}
-
-                <div class="card-footer">
-                    <a href="" class="btn btn-info btn-sm">Like</a>
+                
+                <div style="" class="card-footer d-flex justify-content-around" >
+                    <div class="">
+                        <form action="/posts/{{$post->id}}/liked" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-sm px-5 {{$post->likeByCurrentUser() ? "btn-danger" : "btn-info"}}" style="">
+                                <span style="margin-right: 15px">{{$post->likes->count()}}</span>
+                                <i class="fa-regular fa-thumbs-up" style="font-size:17px"></i>
+                                <span class="m-1">{{$post->likeByCurrentUser() ? "Dislike" : "Like"}}</span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="">                        
+                        <a type="submit" class="text-black text-decoration-none px-5" style="">
+                            <span style="margin-right: 5px">{{$post->comments->count()}}</span>                            
+                            <span class="m-1">Comment</span>
+                        </a>
+                    </div>
                 </div>
+
+
+
+
+
+
+
+
+
                 <div class="container">
-                    @include('partials.successdismiss')
+                    @include('partials.message')
+                    
                     <h3 class="m-0">Comment</h3>
                     <form action="/posts/{{$post->id}}/comments" method="POST">
                         @csrf
@@ -69,7 +94,7 @@
                 <div class="card mb-2">
                     <div class="p-3">
                         <p class="m-0 p-0" style="font-size: 18px">{{$comment->woner->name}}</p>
-                        <p class="m-0 p-0" style="font-size: 10px">{{$comment->created_at->diffForHumans()}}</p>
+                        <p class="m-0 p-0" style="font-size: 10px" title="{{$comment->created_at}}">{{$comment->created_at->diffForHumans()}}</p>
                     </div>
                     <div class="card-body">
                         {{$comment->comment_body}}
@@ -90,8 +115,10 @@
                 </div>
                 <div class="card-body">
                     @foreach ($catagories as $catagory)
-                        <span class="list-group-item">{{$catagory->name}}</span>
+                        <span class="list-group-item">{{($catagory->id == $post->catagory_id) ? $catagory->name : ''}}</span>
                     @endforeach
+                    
+                    {{-- <span class="list-group-item">{{$post->catagory_id}}</span> --}}
                 </div>
             </div>
 
@@ -102,7 +129,7 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
-                        @foreach ($tags as $tag)
+                        @foreach ($post->tags as $tag)
                             <li class="list-group-item">{{$tag->name}}</li>
                         @endforeach
                     </ul>

@@ -42,6 +42,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         $validate_data = request()->validate([
@@ -51,7 +52,7 @@ class PostsController extends Controller
             'catagory_id' => 'required|exists:catagories,id',
             'tag_id' => 'exists:tags,id',
         ]);
-
+        
         $tags = request('tag_id');
         $tag = Tag::find($tags);
         $post = Post::create(request()->except('_token', 'tag_id'));

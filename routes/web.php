@@ -27,6 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/catagories', CatagoriesController::class)->middleware('auth');
 Route::resource('/posts', PostsController::class);
-Route::post('/posts/{id}/comments', [CommentsController::class, 'store']);
+Route::post('/posts/{id}/comments', [CommentsController::class, 'store'])->middleware('auth');
+Route::post('/posts/{id}/liked', [CommentsController::class, 'likeStore'])->middleware('auth');
 Route::resource('/tags', TagController::class);
 

@@ -15,8 +15,8 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     
     <!-- Scripts -->
-    <script src="https://kit.fontawesome.com/f820eab44a.js" crossorigin="anonymous"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script src="https://kit.fontawesome.com/f820eab44a.js" crossorigin="anonymous"></script>
 
     
 </head>

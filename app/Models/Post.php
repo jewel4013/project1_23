@@ -15,6 +15,7 @@ class Post extends Model
         return $this->belongsToMany('App\Models\Tag');
     }
 
+
     public function thumbnail_path(){
         return asset("images/post/$this->thumbnail");
     }
@@ -23,4 +24,18 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function likes()
+    {
+        return $this->morphMany('App\Models\Like', 'likeable');
+    }
+
+    public function likeByCurrentUser()
+    {
+        return $this->likes()->where('user_id', auth()->id())->exists();
+    }
+
+
+
+
 }

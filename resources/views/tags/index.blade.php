@@ -11,7 +11,7 @@
                     <p><a href="/tags/create" class="">Create a new one</a></p>
                 </div>
                 <div class="card-body">
-                    @include('partials.successdismiss')
+                    @include('partials.message')
                     <table class="table">
                         <tr>
                             <th>Id</th>

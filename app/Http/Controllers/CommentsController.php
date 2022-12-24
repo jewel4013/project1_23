@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
@@ -48,6 +49,25 @@ class CommentsController extends Controller
         return back()->with('successdismiss', 'Comment success!');
     }
 
+
+
+    /*
+        Like store
+    */
+    public function likeStore(Request $request, $id)
+    {
+        $post = Post::find($id);
+        $like = $post->likes()->where('user_id', auth()->id())->first();
+        if($like)
+        {
+            $like->delete();
+            return back();
+        }
+        $post->likes()->create([
+            'user_id' => auth()->id(),
+        ]);
+        return back();
+    }
     /**
      * Display the specified resource.
      *
