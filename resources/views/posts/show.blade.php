@@ -93,11 +93,13 @@
             @foreach ($post->comments as $comment)
                 <div class="card mb-2">
                     <div class="p-3">
-                        <p class="m-0 p-0" style="font-size: 18px">{{$comment->woner->name}}</p>
+                        <p class="m-0 p-0 d-flex justify-content-between" style="font-size: 18px">{{$comment->woner->name}}
+                            <a href="#" class="btn btn-info btn-sm"><i class="fa-regular fa-thumbs-up" style="font-size:17px"></i></a>
+                        </p>
                         <p class="m-0 p-0" style="font-size: 10px" title="{{$comment->created_at}}">{{$comment->created_at->diffForHumans()}}</p>
                     </div>
                     <div class="card-body">
-                        {{$comment->comment_body}}
+                        {{$comment->comment_body}} 
                     </div>
                 </div>
             @endforeach
