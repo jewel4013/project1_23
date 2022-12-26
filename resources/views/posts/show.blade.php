@@ -46,7 +46,7 @@
                         <form action="/posts/{{$post->id}}/liked" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-sm px-5 {{$post->likeByCurrentUser() ? "btn-danger" : "btn-info"}}" style="">
-                                <span style="margin-right: 15px">{{$post->likes->count()}}</span>
+                                <span class="{{$post->likes()->count() == 0 ? 'd-none' : ''}}" style="margin-right: 15px">{{$post->likes->count()}}</span>
                                 <i class="fa-regular fa-thumbs-up" style="font-size:17px"></i>
                                 <span class="m-1">{{$post->likeByCurrentUser() ? "Dislike" : "Like"}}</span>
                             </button>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="">                        
                         <a type="submit" class="text-black text-decoration-none px-5" style="">
-                            <span style="margin-right: 5px">{{$post->comments->count()}}</span>                            
+                            <span class="{{$post->comments->count() == 0 ? 'd-none' : ''}}" style="margin-right: 5px">{{$post->comments->count()}}</span>                            
                             <span class="m-1">Comment</span>
                         </a>
                     </div>
@@ -94,7 +94,10 @@
                 <div class="card mb-2">
                     <div class="p-3">
                         <p class="m-0 p-0 d-flex justify-content-between" style="font-size: 18px">{{$comment->woner->name}}
-                            <a href="#" class="btn btn-info btn-sm"><i class="fa-regular fa-thumbs-up" style="font-size:17px"></i></a>
+                            <a href="/comments/{{$comment->id}}/liked" class="btn btn-sm {{($comment->likeByCurrentUser()) ? 'btn-danger' : 'btn-info'}}">
+                                <span class="m-2 {{$comment->likes()->count() == 0 ? 'd-none' : ''}}">{{$comment->likes()->count()}}</span>
+                                <i class="fa-regular fa-thumbs-up" style="font-size:17px"></i>
+                            </a>
                         </p>
                         <p class="m-0 p-0" style="font-size: 10px" title="{{$comment->created_at}}">{{$comment->created_at->diffForHumans()}}</p>
                     </div>

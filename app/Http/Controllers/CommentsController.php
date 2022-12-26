@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,6 +69,22 @@ class CommentsController extends Controller
         ]);
         return back();
     }
+
+    public function commentLikeStore(Comment $comment)
+    {
+        $like = $comment->likes()->where('user_id', auth()->id())->first();
+        if($like)
+        {
+            $like->delete();
+            return back();
+        }
+        $comment->likes()->create([
+            'user_id' => auth()->id(),
+        ]);
+        return back();
+    }
+
+
     /**
      * Display the specified resource.
      *
