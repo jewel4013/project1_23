@@ -69,8 +69,8 @@
                         <h4 class="m-0">{{ __('Catagories') }}</h4>
                     </div>
                     <div class="card-body">
-                        <span class="list-group-item  bg-secondary text-white">
-                            <a href="{{url('/')}}" class="text-decoration-none text-white">All Posts</a>
+                        <span class="list-group-item">
+                            <a href="{{url('/')}}" class="text-decoration-none">All Posts</a>
                             <span class="m-3">{{$posts->count()}}</span>
                         </span>
                         @foreach ($catagories as $catagory)

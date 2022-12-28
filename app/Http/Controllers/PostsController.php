@@ -55,7 +55,13 @@ class PostsController extends Controller
         
         $tags = request('tag_id');
         $tag = Tag::find($tags);
-        $post = Post::create(request()->except('_token', 'tag_id'));
+        $post = Post::create([
+            'title' => request('title'),
+            'body'=> request('body'),
+            'thumbnail' => request('thumbnail'),
+            'catagory_id'=> request('catagory_id'),
+            'user_id' => auth()->id()
+        ]);
 
         if(request()->hasFile('thumbnail')){
             $ext = request()->file('thumbnail')->getClientOriginalExtension();

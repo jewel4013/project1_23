@@ -11,5 +11,8 @@ class Catagory extends Model
 
     protected $guarded = [];
 
+    public function posts(){
+        return $this->hasMany('App\Models\Post');
+    }
     
 }

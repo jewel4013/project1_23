@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->integer('status')->default(0);
             $table->unsignedBigInteger('catagory_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

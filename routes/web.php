@@ -4,6 +4,7 @@ use App\Http\Controllers\CatagoriesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\searchController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,10 +26,20 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 Route::resource('/catagories', CatagoriesController::class)->middleware('auth');
-Route::resource('/posts', PostsController::class);
+
+
+Route::resource('/posts', PostsController::class)->except(['index','show'])->middleware('auth');
+Route::get('/posts', [PostsController::class, 'index']);
+Route::get('/posts/catagory/{catagory}', [searchController::class, 'searchCatagory']);
+Route::get('/posts/{id}', [PostsController::class, 'show']);
+
+
 Route::post('/posts/{id}/comments', [CommentsController::class, 'store'])->middleware('auth');
 Route::post('/posts/{id}/liked', [CommentsController::class, 'likeStore'])->middleware('auth');
 Route::get('/comments/{comment}/liked', [CommentsController::class, 'commentLikeStore'])->middleware('auth');
+
+
 Route::resource('/tags', TagController::class);
 
