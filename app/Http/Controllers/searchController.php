@@ -13,9 +13,9 @@ class searchController extends Controller
     {
         $post = $catagory->posts()->paginate(5);
 
-        return view('posts.catagorywise', [
+        return view('welcome', [
             'posts' => $post,
-            'catagories' => Catagory::all(),
+            // 'catagories' => Catagory::all(),  //----->Gloal catagories used
             'tags' => Tag::all(),
             'allposts' => Post::all(),
         ]);

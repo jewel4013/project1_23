@@ -120,7 +120,11 @@
                 </div>
                 <div class="card-body">
                     @foreach ($catagories as $catagory)
-                        <span class="list-group-item">{{($catagory->id == $post->catagory_id) ? $catagory->name : ''}}</span>
+                        <span class="list-group-item">
+                            <a href="/posts/catagory/{{$catagory->id}}" class="text-decoration-none">
+                                {{($catagory->id == $post->catagory_id) ? $catagory->name : ''}}
+                            </a>
+                        </span>
                     @endforeach
                     
                     {{-- <span class="list-group-item">{{$post->catagory_id}}</span> --}}

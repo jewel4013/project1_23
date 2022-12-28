@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Catagory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
+        // gloal $catagories valiale 
+        view()->composer('*', function($view){
+            $catagories = Catagory::all();
+            $view->with('catagories', $catagories);
+        });
     }
 }

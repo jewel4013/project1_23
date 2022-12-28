@@ -19,8 +19,9 @@ class PageController extends Controller
     {
         return view('welcome', [
             'posts' => Post::all(),
-            'catagories' => Catagory::all(),
+            // 'catagories' => Catagory::all(), //--------->Gloal Catagories used
             'tags' => Tag::all(),
+            'allposts' => Post::all(),
         ]);
     }
 

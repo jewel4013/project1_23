@@ -27,7 +27,8 @@
             <div class="card mb-2">
                 <a href="/posts/create" class="btn">Create a new post</a>
             </div>
-            @foreach ($posts as $post)    
+
+            @forelse ($posts as $post)    
                 <div class="card mb-3">
                     <div class="card-header d-flex align-items-center">
                         <div class="">
@@ -59,7 +60,9 @@
                         </div>
                     </div> --}}
                 </div>
-            @endforeach
+            @empty
+                <h1 class="d-flex justify-content-center mt-5 text-danger " style="font-weight:bolder">No record found</h1>
+            @endforelse
         </div>
 
         <div class="col-md-2">
@@ -71,7 +74,7 @@
                     <div class="card-body">
                         <span class="list-group-item  bg-secondary text-white">
                             <a href="{{url('/')}}" class="text-decoration-none text-white">All Posts</a>
-                            <span class="m-3">{{$posts->count()}}</span>
+                            <span class="m-3">{{$allposts->count()}}</span>
                         </span>
                         @foreach ($catagories as $catagory)
                             <span class="list-group-item ">

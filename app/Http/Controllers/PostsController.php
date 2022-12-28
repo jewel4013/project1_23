@@ -31,7 +31,7 @@ class PostsController extends Controller
     public function create()
     {
         return view('posts.create', [
-            'catagories' => Catagory::all(),
+            // 'catagories' => Catagory::all(),   //-------->Gloal Catagories used
             'tags' => Tag::all(),
         ]);
     }
@@ -73,7 +73,7 @@ class PostsController extends Controller
         }
 
         $post->tags()->attach($tag);
-        return redirect(url('/posts'))->with('successdismiss', 'Post upload succesfully');
+        return redirect(url('/posts'))->with('successdismiss', 'Post Create succesfully');
     }
 
     /**
@@ -86,8 +86,9 @@ class PostsController extends Controller
     {
         return view('posts.show', [
             'post' => Post::find($id),
-            'catagories' => Catagory::all(),
+            // 'catagories' => Catagory::all(),  //------>Gloal catagories used
             'tags' => Tag::all(),
+            
         ]);
     }
 
@@ -101,7 +102,7 @@ class PostsController extends Controller
     {
         return view('posts.edit', [
             'post' => Post::find($id),
-            'catagories' => Catagory::all(),
+            // 'catagories' => Catagory::all(),  //----->Gloal catagories used
             'tags' => Tag::all(),
         ]);
     }

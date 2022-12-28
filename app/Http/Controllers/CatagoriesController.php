@@ -15,7 +15,7 @@ class CatagoriesController extends Controller
     public function index()
     {
         return view('catagories.index', [
-            'catagories' => Catagory::all(),
+            // 'catagories' => Catagory::all(),
         ]);
     }
 
