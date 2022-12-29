@@ -14,5 +14,11 @@ class Catagory extends Model
     public function posts(){
         return $this->hasMany('App\Models\Post');
     }
+
+    public function searchByStatus(){
+        $statusCount = $this->posts()->where('status', 1)->get();
+        return $statusCount;
+    }
+
     
 }

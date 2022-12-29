@@ -18,10 +18,10 @@ class PageController extends Controller
     public function index()
     {
         return view('welcome', [
-            'posts' => Post::all(),
+            'posts' => Post::where('status', 1)->get(),
             // 'catagories' => Catagory::all(), //--------->Gloal Catagories used
             'tags' => Tag::all(),
-            'allposts' => Post::all(),
+            'allposts' => Post::where('status', 1)->get(),
         ]);
     }
 

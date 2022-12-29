@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\File;
 
 class PostsController extends Controller
 {
+    // middleware used for this controller.
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('admin')->only('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -73,7 +80,7 @@ class PostsController extends Controller
         }
 
         $post->tags()->attach($tag);
-        return redirect(url('/posts'))->with('successdismiss', 'Post Create succesfully');
+        return redirect(url('/'))->with('successdismiss', 'Post Create succesfully');
     }
 
     /**
@@ -82,10 +89,19 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
+        if(auth()->check())
+        {
+            if(!$post->status && auth()->user()->user_type != 'admin') return back();
+        }
+        else
+        {
+            if(!$post->status) return back();
+        }
+
         return view('posts.show', [
-            'post' => Post::find($id),
+            'post' => $post,
             // 'catagories' => Catagory::all(),  //------>Gloal catagories used
             'tags' => Tag::all(),
             
@@ -145,6 +161,26 @@ class PostsController extends Controller
 
         $post->tags()->sync($tag);
         return redirect(url('/posts'))->with('successdismiss', 'Post Update successful....okh!');
+    }
+
+
+    public function approve(Post $post)
+    {
+        $post->update([
+            'status' => 1,
+        ]);
+
+        return back()->with('successdismiss', 'Post approve success');
+    }
+
+
+    public function hangon(Post $post)
+    {
+        $post->update([
+            'status' => 0,
+        ]);
+
+        return back()->with('successdismiss', 'Post Hangon success');
     }
 
     /**

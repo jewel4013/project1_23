@@ -27,13 +27,13 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('/catagories', CatagoriesController::class)->middleware('auth');
+Route::resource('/catagories', CatagoriesController::class)->middleware(['auth', 'admin']);
 
 
-Route::resource('/posts', PostsController::class)->except(['index','show'])->middleware('auth');
-Route::get('/posts', [PostsController::class, 'index']);
+Route::resource('/posts', PostsController::class); //--->Middleware used in controller.
+Route::get('/posts/{post}/approve', [PostsController::class, 'approve'])->middleware('auth', 'admin');
+Route::get('/posts/{post}/hangon', [PostsController::class, 'hangon'])->middleware('auth', 'admin');
 Route::get('/posts/catagory/{catagory}', [searchController::class, 'searchCatagory']);
-Route::get('/posts/{id}', [PostsController::class, 'show']);
 
 
 Route::post('/posts/{id}/comments', [CommentsController::class, 'store'])->middleware('auth');
@@ -41,5 +41,5 @@ Route::post('/posts/{id}/liked', [CommentsController::class, 'likeStore'])->midd
 Route::get('/comments/{comment}/liked', [CommentsController::class, 'commentLikeStore'])->middleware('auth');
 
 
-Route::resource('/tags', TagController::class);
+Route::resource('/tags', TagController::class)->middleware(['auth', 'admin']);
 

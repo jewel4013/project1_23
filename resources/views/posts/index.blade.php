@@ -18,7 +18,7 @@
                             <th>Title</th>
                             <th>Created_at</th>
                             <th>User</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                         @foreach ($postall as $post)
                             <tr>
@@ -27,8 +27,13 @@
                                 <td>{{$post->created_at->diffForHumans()}}</td>
                                 <td>{{$post->user_id}}</td>
                                 <td>
-                                    <a href="/posts/{{$post->id}}/edit" class="btn btn-warning">Edit</a>    
+                                    <a href="/posts/{{$post->id}}/edit" class="btn btn-warning">Edit</a>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">Delete</button>
+                                    @if ($post->status == 1)
+                                        <a href="/posts/{{$post->id}}/hangon" class="btn btn-danger">Hangon</a>
+                                    @else
+                                        <a href="/posts/{{$post->id}}/approve" class="btn btn-success">Approve</a>
+                                    @endif
                                      
                                       <!-- The Modal -->
                                       <div class="modal" id="myModal">

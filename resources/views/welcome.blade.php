@@ -79,7 +79,7 @@
                         @foreach ($catagories as $catagory)
                             <span class="list-group-item ">
                                 <a href="/posts/catagory/{{$catagory->id}}" class="text-decoration-none">{{$catagory->name}}</a>
-                                <span class="m-3">{{$catagory->posts->count()}}</span>
+                                <span class="m-3">{{$catagory->searchByStatus()->count()}}</span>
                             </span>
                         @endforeach
                     </div>
