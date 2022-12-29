@@ -102,7 +102,7 @@ class PostsController extends Controller
 
         return view('posts.show', [
             'post' => $post,
-            // 'catagories' => Catagory::all(),  //------>Gloal catagories used
+            // 'catagories' => Catagory::all(),  //------>Gloal catagories used (App\Providers\AppServiceProvider:boot)
             'tags' => Tag::all(),
             
         ]);
