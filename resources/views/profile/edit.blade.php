@@ -8,9 +8,8 @@
                 <div class="card-header">{{ __('Update Profile') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/profile/{{$user->id}}/edit" enctype="multipart/form-data">
+                    <form method="POST" action="/profile/edit" enctype="multipart/form-data">
                         @csrf
-                        @method('post')
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
@@ -50,7 +49,7 @@
                             <div class="col-md-6">
                                 <input id="date_of_birth" type="date" 
                                     class="form-control @error('date_of_birth') is-invalid @enderror" 
-                                    name="date_of_birth" value="{{ old('date_of_birth') ? odl('date_of_birth') : $user->date_of_birth->format('Y-m-d') }}">
+                                    name="date_of_birth" value="{{ old('date_of_birth') ? old('date_of_birth') : $user->date_of_birth->format('Y-m-d') }}">
 
                                 @error('date_of_birth')
                                     <span class="invalid-feedback" role="alert">
@@ -66,14 +65,14 @@
                             <div class="col-md-6">
                                 <input id="profile_pic" type="file" 
                                     class="form-control @error('profile_pic') is-invalid @enderror" 
-                                    name="profile_pic">
+                                    name="profile_pic" value="{{old('profile_pic')}}">
 
                                 @error('profile_pic')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <img src="" alt="Profile pic">
+                                <img src='{{asset("/images/profile/$user->profile_pic")}}' alt="Profile picture" style="width:100px; height:100px" class="">
                             </div>
                         </div>
 
@@ -81,7 +80,9 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" 
+                                class="form-control @error('password') is-invalid @enderror" 
+                                name="password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -95,7 +96,9 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" 
+                                class="form-control" 
+                                name="password_confirmation">
                             </div>
                         </div>
 

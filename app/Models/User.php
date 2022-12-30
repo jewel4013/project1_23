@@ -46,4 +46,9 @@ class User extends Authenticatable
     protected $dates = [
         'date_of_birth',
     ];
+
+    public function profile_pic()
+    {
+        return asset("images/profile/$this->profile_pic");
+    }
 }

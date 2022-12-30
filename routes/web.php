@@ -43,7 +43,9 @@ Route::get('/comments/{comment}/liked', [CommentsController::class, 'commentLike
 
 
 
-Route::resource('/profile', ProfileController::class)->middleware('auth');
+Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->middleware('auth');
+Route::post('/profile/edit', [ProfileController::class, 'update'])->middleware('auth');
 
 
 

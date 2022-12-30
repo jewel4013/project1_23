@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         return view('profile.index', [
@@ -18,69 +15,67 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    
+    // oi bow. I love You tomar cheye o beshi.
+    
+    public function edit()
     {
         return view('profile.edit', [
             'user' => auth()->user(),
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+    public function update()
     {
-        //
+        
+        request()->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'date_of_birth' => '',
+            'profile_pic' => 'image|mimes:jpg,jpeg,png',
+            'password' => request('password') ? 'required|string|min:6|confirmed' : '',
+        ]);
+        
+        $user = auth()->user();
+
+        $user->name = request('name');
+        $user->date_of_birth = request('date_of_birth');
+        $user->password = Hash::make(request('password'));
+        
+        if(request()->hasFile('profile_pic'))
+        {
+            $ext = request()->file('profile_pic')->getClientOriginalExtension();
+            $file_name = $user->id.'.'.$ext;
+            request()->file('profile_pic')->move('images/profile', $file_name);
+
+            $user->profile_pic = $file_name;
+        }
+
+        $user->save();
+
+
+        return redirect('/profile')->with('successdismiss', 'Profile update success');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //
