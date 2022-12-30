@@ -4,6 +4,7 @@ use App\Http\Controllers\CatagoriesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\searchController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +40,11 @@ Route::get('/posts/catagory/{catagory}', [searchController::class, 'searchCatago
 Route::post('/posts/{id}/comments', [CommentsController::class, 'store'])->middleware('auth');
 Route::post('/posts/{id}/liked', [CommentsController::class, 'likeStore'])->middleware('auth');
 Route::get('/comments/{comment}/liked', [CommentsController::class, 'commentLikeStore'])->middleware('auth');
+
+
+
+Route::resource('/profile', ProfileController::class)->middleware('auth');
+
 
 
 Route::resource('/tags', TagController::class)->middleware(['auth', 'admin']);
