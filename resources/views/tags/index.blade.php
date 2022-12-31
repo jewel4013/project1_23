@@ -23,7 +23,7 @@
                             <tr>
                                 <td>{{$tag->id}}</td>
                                 <td>{{$tag->name}}</td>
-                                <td>{{$tag->description}}</td>
+                                <td>{{Str::limit($tag->description, 50, '...')}}</td>
                                 <td>
                                     <a href="/tags/{{$tag->id}}/edit" class="btn btn-warning">Edit</a>    
                                     {{-- <form action="/tags/{{$tag->id}}" method="POST" class="d-inline-block">

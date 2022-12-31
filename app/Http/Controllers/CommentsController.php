@@ -38,7 +38,7 @@ class CommentsController extends Controller
     public function store(Request $request, $id)
     {
         request()->validate([
-            'comment_body' => 'required|min:3'
+            'comment_body' => 'required|min:1'
         ]);
 
         $post = Post::find($id);

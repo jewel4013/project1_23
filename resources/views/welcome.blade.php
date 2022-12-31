@@ -65,8 +65,8 @@
             @endforelse
         </div>
 
-        <div class="col-md-2">
-            <div class="sticky-sm-top" style="z-index: -10">
+        <div class="col-md-2 position-sticky">
+            <div class="" style="">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h4 class="m-0">{{ __('Catagories') }}</h4>

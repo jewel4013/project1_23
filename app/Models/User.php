@@ -51,4 +51,10 @@ class User extends Authenticatable
     {
         return asset("images/profile/$this->profile_pic");
     }
+    
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
+    
 }
