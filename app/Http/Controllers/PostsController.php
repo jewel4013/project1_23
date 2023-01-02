@@ -14,7 +14,7 @@ class PostsController extends Controller
     // middleware used for this controller.
     public function __construct()
     {
-        $this->middleware('auth')->except('index', 'show');
+        $this->middleware('auth')->except('show');
         $this->middleware('admin')->only('index');
     }
 
@@ -69,6 +69,13 @@ class PostsController extends Controller
             'catagory_id'=> request('catagory_id'),
             'user_id' => auth()->id()
         ]);
+
+        if(auth()->user()->user_type == 'admin')
+        {
+            $post->update([
+                'status' => 1,
+            ]);
+        }
 
         if(request()->hasFile('thumbnail')){
             $ext = request()->file('thumbnail')->getClientOriginalExtension();
