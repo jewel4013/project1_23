@@ -11,13 +11,16 @@
                     <h4 class="m-0">{{ __('User Information') }}</h4>
                 </div>
                 <div class="card-body">
-                @guest
-                                        
-                @else
-                    <h2>{{Auth::user()->name}}</h2>
-                    <b>{{Auth::user()->user_type}}</b><br>
-                    <b>{{Auth::user()->email}}</b>
-                @endguest
+                    @guest
+                                            
+                    @else
+                        <h2>{{Auth::user()->name}}</h2>
+                        <b>{{Auth::user()->user_type}}</b><br>
+                        <b>{{Auth::user()->email}}</b>
+                    @endguest
+                </div>
+                <div class="card-body">
+                    <a href="/userinfo" class="btn btn-info btn-sm">Download User information</a>
                 </div>
             </div>
         </div>
