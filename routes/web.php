@@ -3,6 +3,7 @@
 use App\Http\Controllers\CatagoriesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\searchController;
@@ -46,6 +47,9 @@ Route::get('/comments/{comment}/liked', [CommentsController::class, 'commentLike
 Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth');
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->middleware('auth');
 Route::post('/profile/edit', [ProfileController::class, 'update'])->middleware('auth');
+
+//user information
+Route::get('/userinfo', [PDFController::class, 'userinfo']);
 
 
 

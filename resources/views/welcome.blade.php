@@ -6,21 +6,30 @@
        
 
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h4 class="m-0">{{ __('User Information') }}</h4>
-                </div>
-                <div class="card-body">
-                    @guest
-                                            
-                    @else
+            @guest
+
+            @else    
+                <div class="card mb-3">
+                    <div class="card-header d-flex justify-content-between">
+                        <h4 class="m-0">{{ __('User Information') }}</h4>
+                    </div>
+                    <div class="card-body">
                         <h2>{{Auth::user()->name}}</h2>
                         <b>{{Auth::user()->user_type}}</b><br>
                         <b>{{Auth::user()->email}}</b>
-                    @endguest
+                    </div>
+                    <div class="card-body">
+                        <a href="/userinfo" class="btn btn-info btn-sm">Download User information</a>
+                    </div>
+                </div>
+            @endguest
+                
+            <div class="card">
+                <div class="card-header">
+                    <h3>Templete</h3>
                 </div>
                 <div class="card-body">
-                    <a href="/userinfo" class="btn btn-info btn-sm">Download User information</a>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe adipisci repellendus ratione nobis ipsa quidem unde iste deleniti, dolor dolore nulla delectus accusantium corporis doloremque tenetur expedita. Laborum, impedit doloribus.</p>
                 </div>
             </div>
         </div>
