@@ -16,6 +16,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="https://kit.fontawesome.com/f820eab44a.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
     
     
     
@@ -96,6 +97,8 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>    
+    </div>   
+    
+    @yield('script')
 </body>
 </html>

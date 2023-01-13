@@ -69,7 +69,11 @@
                         <div class="row mb-3">
                             <label for="body" class="col-md-4 col-form-label text-md-end">{{ __('Post Body') }}</label>
                             <div class="col-md-6">
-                                <textarea id="body" class="form-control @error('body') is-invalid @enderror" name="body" cols="5" role="3">{{ old('body') }}</textarea>
+                                <textarea id="body" 
+                                    class="form-control @error('body') is-invalid @enderror" 
+                                    name="body" 
+                                    cols="5" 
+                                    role="3">{{ old('body') }}</textarea>
                                 @error('body')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -106,4 +110,18 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('script')
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#body' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
+    </script>
 @endsection

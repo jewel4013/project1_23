@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p class="m-0 p-0">{{Str::limit($post->body, '100', '...')}}</p>
+                        <p class="m-0 p-0">{!! Str::limit($post->body, '100', '...') !!}</p>
                     </div>
                 </div>
             @empty

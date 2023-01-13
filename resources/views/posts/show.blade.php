@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="m-0 p-0">{{$post->body}}</p>
+                    <p class="m-0 p-0">{!! $post->body !!}</p>
                     {{-- <div class="">
                         <img src="{{$post->thumbnail_path()}}" alt="Thumbnail Photo" width="400" height="400">
                     </div> --}}
