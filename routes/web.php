@@ -8,6 +8,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\searchController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,7 @@ Route::post('/profile/edit', [ProfileController::class, 'update'])->middleware('
 Route::get('/userinfo', [PDFController::class, 'userinfo']);
 
 
-
 Route::resource('/tags', TagController::class)->middleware(['auth', 'admin']);
+
+Route::resource('/users', UserController::class)->middleware(['auth', 'admin']);
 

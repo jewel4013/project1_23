@@ -56,14 +56,17 @@
                         @else
                             @if(Auth::user()->user_type == 'admin')
                                 <li class="nav-item">
+                                    <a href="/catagories" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Categories</a>
+                                </li>    
+                                <li class="nav-item">
                                     <a href="/tags" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Tags</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/posts" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Posts</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/catagories" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Categories</a>
-                                </li>    
+                                    <a href="/users" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Users</a>
+                                </li>
                             @endif                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

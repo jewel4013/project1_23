@@ -15,8 +15,9 @@
                     </div>
                     <div class="card-body">
                         <h2>{{Auth::user()->name}}</h2>
-                        <b>{{Auth::user()->user_type}}</b><br>
-                        <b>{{Auth::user()->email}}</b>
+                        <p>User ID: <b>{{Auth::user()->email}}</b></p>
+                        <p>User type: <b>{{Auth::user()->user_type}}</b></p>
+                        <p>Last Login: <b>{{Auth::user()->last_login->diffForHumans()}}</b></p>
                     </div>
                     <div class="card-body">
                         <a href="/userinfo" class="btn btn-info btn-sm">Download User information</a>

@@ -45,6 +45,7 @@ class User extends Authenticatable
 
     protected $dates = [
         'date_of_birth',
+        'last_login'
     ];
 
     public function profile_pic()

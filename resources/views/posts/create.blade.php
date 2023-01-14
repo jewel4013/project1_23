@@ -51,7 +51,7 @@
                             <label for="tag_id" class="col-md-4 col-form-label text-md-end">{{ __('Tags') }}</label>
                             <div class="col-md-6">
                                 <select id="tag_id" class="form-control @error('tag_id') is-invalid @enderror" name="tag_id[]" multiple>
-                                    <option>Select Tag</option>
+                                    <option disabled>Select Tag</option>
                                     @foreach ($tags as $tag)
                                         <option value="{{$tag->id}}">{{$tag->name}}</option>
                                     @endforeach                                
