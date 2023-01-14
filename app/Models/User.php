@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'last_login',
         'date_of_birth',
     ];
 
@@ -43,10 +44,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $dates = [
-        'date_of_birth',
-        'last_login'
-    ];
+    protected $dates = ['date_of_birth', 'last_login'];
 
     public function profile_pic()
     {

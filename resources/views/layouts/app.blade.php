@@ -17,6 +17,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <script src="https://kit.fontawesome.com/f820eab44a.js" crossorigin="anonymous"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     
     
     
@@ -66,6 +67,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="/users" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/countries" class="nav-link text-sm text-gray-700 dark:text-gray-500 ">Countries</a>
                                 </li>
                             @endif                            
                             <li class="nav-item dropdown">

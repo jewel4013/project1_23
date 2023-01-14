@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CatagoriesController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PostsController;
@@ -31,6 +32,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('/catagories', CatagoriesController::class)->middleware(['auth', 'admin']);
+
+
+Route::resource('/countries', CountriesController::class)->middleware(['auth', 'admin']);
 
 
 Route::resource('/posts', PostsController::class); //--->Middleware used in controller.
