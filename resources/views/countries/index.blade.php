@@ -18,34 +18,29 @@
                 <div class="card-body">
                     @include('partials.message')
                     <table class="table table-hover">
-                        <tr>
-                            <th>Id</th>
-                            <th>Country Name</th>
-                            <th>Capital Name</th>
-                            <th>Population</th>
-                            <th>Action</th>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>India</td>
-                            <td>Dehli</td>
-                            <td>145000000</td>
-                            <td>
-                                <button class="btn btn-sm btn-info">Edit</button>
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Pakistan</td>
-                            <td>Islamad</td>
-                            <td>45000000</td>
-                            <td>
-                                <button class="btn btn-sm btn-info">Edit</button>
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Country Name</th>
+                                <th>Capital Name</th>
+                                <th>Population</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="country_t">
+                            @foreach ($countries as $country)    
+                            <tr>
+                                <td>{{$country->id}}</td>
+                                <td>{{$country->country_name}}</td>
+                                <td>{{$country->capital_name}}</td>
+                                <td>{{$country->population}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info">Edit</button> |
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>                        
                     </table>
                 </div>
             </div>
@@ -66,8 +61,10 @@
             </div>
 
 
-            <form action="" id="country_form">
+            <form action="" id="country_form">                
                 <div class="modal-body">
+                    <div class="alert d-none" role="alert" id="alert_msg"></div>
+
                     <div class="form-group">
                         <label for="country_name">Country Name</label>
                         <input type="text" class="form-control" name="country_name" id="country_name">
@@ -106,12 +103,55 @@
             $('#country_form').submit(function(e){
                 e.preventDefault();
 
-                var country_name = $('input[name="country_name"]').val();
-                var capital_name = $('input[name="capital_name"]').val();
-                var population = $('input[name="population"]').val();
+                // var country_name = $('input[name="country_name"]').val();
+                // var capital_name = $('input[name="capital_name"]').val();
+                // var population = $('input[name="population"]').val();
 
-                console.log(country_name, capital_name, population);
+                // console.log(country_name, capital_name, population);
+
+                var form_data =  $('#country_form').serialize();
+
+                $.ajax({
+                    url: '/countries',
+                    method: 'POST',
+                    data: form_data,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(res){
+                        if(!res.status){
+                            $('#alert_msg').removeClass('d-none').removeClass('alert-success').addClass('alert-danger').html(res.message);
+                        }else{
+                            $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
+
+                            var t_data = `
+                                <tr>
+                                    <td>${res.data.id}</td>
+                                    <td>${res.data.country_name}</td>
+                                    <td>${res.data.capital_name}</td>
+                                    <td>${res.data.population}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info">Edit</button> |
+                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            `;
+                            $('#country_t').append(t_data);
+                        }
+
+                        alert_dismis();
+                    },
+                    error: function(res){
+                        console.log(res);
+                    }
+                });
+                
             });
+
+
+            function alert_dismis(){
+                setTimeout(() => {
+                    $('#alert_msg').addClass('d-none');
+                }, 2000);
+            }
         });
     </script>
 

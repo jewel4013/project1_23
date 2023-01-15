@@ -14,7 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->string('country_name', 100)->unique();
+            $table->string('capital_name');
+            $table->integer('population');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CountriesController extends Controller
 {
@@ -15,7 +16,7 @@ class CountriesController extends Controller
     public function index()
     {
         return view('countries.index', [
-            //'countries' => Country::all(),
+            'countries' => Country::all(),
         ]);
     }
 
@@ -37,7 +38,23 @@ class CountriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make(request()->all(), [
+            'country_name' => 'required|unique:countries,country_name',
+            'capital_name' => 'required',
+            'population' => 'required|numeric',
+        ]);
+
+        if($validate->fails())
+        {
+            return ['status' => false, 'message' => 'Data validation fail.'];
+        }
+
+
+        $country = Country::create(request()->all());
+        return ['status' => true, 'message' => 'Country Creation successful.', 'data' => $country];
+
+
+
     }
 
     /**
