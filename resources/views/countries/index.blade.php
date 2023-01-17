@@ -120,7 +120,7 @@
                         if(!res.status){
                             $('#alert_msg').removeClass('d-none').removeClass('alert-success').addClass('alert-danger').html(res.message);
                         }else{
-                            $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
+                            // $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
 
                             var t_data = `
                                 <tr>
@@ -135,6 +135,9 @@
                                 </tr>
                             `;
                             $('#country_t').append(t_data);
+                            $('#country_form')[0].reset();
+                            $('#exampleModal').modal('hide');
+
                         }
 
                         alert_dismis();
@@ -147,11 +150,15 @@
             });
 
 
+
+
             function alert_dismis(){
                 setTimeout(() => {
                     $('#alert_msg').addClass('d-none');
-                }, 2000);
+                }, 3000);
             }
+
+            
         });
     </script>
 
