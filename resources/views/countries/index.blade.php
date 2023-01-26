@@ -35,7 +35,7 @@
                                 <td>{{$country->capital_name}}</td>
                                 <td>{{$country->population}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-info">Edit</button> |
+                                    <button class="btn btn-sm btn-info edit-country" data-bs-toggle="modal" data-bs-target="#editExampleModal" data-country="{{$country}}">Edit</button> |
                                     <button class="btn btn-sm btn-danger">Delete</button>
                                 </td>
                             </tr>
@@ -56,7 +56,7 @@
 
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create A New Country</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -93,13 +93,104 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editExampleModal" tabindex="-1" aria-labelledby="editExampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="editExampleModalLabel">Edit your country</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+
+            <form action="" id="country_edit_form">                
+                <div class="modal-body">
+                    <div class="alert d-none" role="alert" id="alert_msg"></div>
+
+                    <input type="hidden" name="id">
+                    <div class="form-group">
+                        <label for="country_name">Country Name</label>
+                        <input type="text" class="form-control" name="country_name" id="country_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="capital_name">Capital</label>
+                        <input type="text" class="form-control" name="capital_name" id="capital_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="population">Population</label>
+                        <input type="text" class="form-control" name="population" id="population">
+                    </div>
+                </div>
+                
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update Country</button>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @section('script')
 
     <script>
         $(function(){
+
+
+            // ============= New Country insert ===================
             $('#country_form').submit(function(e){
                 e.preventDefault();
 
@@ -122,6 +213,7 @@
                         }else{
                             // $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
 
+                            var res_data = JSON.stringify(res.data);
                             var t_data = `
                                 <tr>
                                     <td>${res.data.id}</td>
@@ -129,7 +221,7 @@
                                     <td>${res.data.capital_name}</td>
                                     <td>${res.data.population}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-info">Edit</button> |
+                                        <button class="btn btn-sm btn-info edit-country" data-bs-toggle="modal" data-bs-target="#editExampleModal" data-country='${res_data}''>Edit</button> |
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </td>
                                 </tr>
@@ -137,7 +229,6 @@
                             $('#country_t').append(t_data);
                             $('#country_form')[0].reset();
                             $('#exampleModal').modal('hide');
-
                         }
 
                         alert_dismis();
@@ -151,12 +242,77 @@
 
 
 
+             // ============= Edit Country ===================
+             $('body').on('click', '.edit-country', function(e){
+                e.preventDefault();
+
+                var country = $(this).data('country');
+                $('#editExampleModal form input[name="id"]').val(country.id);
+                $('#editExampleModal form input[name="country_name"]').val(country.country_name);
+                $('#editExampleModal form input[name="capital_name"]').val(country.capital_name);
+                $('#editExampleModal form input[name="population"]').val(country.population);
+
+                console.log($(this).data('country'));
+                
+            });
+
+
+
+            // ============= Update Country ===================
+            $('#country_edit_form').submit(function(e){
+                e.preventDefault();
+
+                var form_data =  $('#country_edit_form').serialize();
+                console.log(form_data);
+
+                // $.ajax({
+                //     url: '/countries',
+                //     method: 'POST',
+                //     data: form_data,
+                //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                //     success: function(res){
+                //         if(!res.status){
+                //             $('#alert_msg').removeClass('d-none').removeClass('alert-success').addClass('alert-danger').html(res.message);
+                //         }else{
+                //             // $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
+
+                //             var res_data = JSON.stringify(res.data);
+                //             var t_data = `
+                //                 <tr>
+                //                     <td>${res.data.id}</td>
+                //                     <td>${res.data.country_name}</td>
+                //                     <td>${res.data.capital_name}</td>
+                //                     <td>${res.data.population}</td>
+                //                     <td>
+                //                         <button class="btn btn-sm btn-info edit-country" data-bs-toggle="modal" data-bs-target="#editExampleModal" data-country='${res_data}''>Edit</button> |
+                //                         <button class="btn btn-sm btn-danger">Delete</button>
+                //                     </td>
+                //                 </tr>
+                //             `;
+                //             $('#country_t').append(t_data);
+                //             $('#country_form')[0].reset();
+                //             $('#exampleModal').modal('hide');
+                //         }
+
+                //         alert_dismis();
+                //     },
+                //     error: function(res){
+                //         console.log(res);
+                //     }
+                // });
+                
+            });
+
+
 
             function alert_dismis(){
                 setTimeout(() => {
                     $('#alert_msg').addClass('d-none');
                 }, 3000);
             }
+
+
+                      
 
             
         });
