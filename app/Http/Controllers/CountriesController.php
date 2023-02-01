@@ -88,7 +88,24 @@ class CountriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $country = Country::find($id);
+
+        $validate = Validator::make(request()->all(), [
+            'country_name' => 'required|unique:countries,country_name,'.$country->id,
+            'capital_name' => 'required',
+            'population' => 'required|numeric',
+        ]);
+
+        if($validate->fails())
+        {
+            return ['status' => false, 'message' => 'Data validation fail.'];
+        }
+    
+        
+
+        $country->update(request()->except('id'));
+
+        return ['status' => true, 'message' => 'Country update success'];
     }
 
     /**

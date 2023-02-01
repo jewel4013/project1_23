@@ -118,6 +118,7 @@
 
             <form action="" id="country_edit_form">                
                 <div class="modal-body">
+                    
                     <div class="alert d-none" role="alert" id="alert_msg"></div>
 
                     <input type="hidden" name="id">
@@ -263,43 +264,45 @@
                 e.preventDefault();
 
                 var form_data =  $('#country_edit_form').serialize();
+                var form_data_id = $('#country_edit_form input[name="id"]').val();
                 console.log(form_data);
 
-                // $.ajax({
-                //     url: '/countries',
-                //     method: 'POST',
-                //     data: form_data,
-                //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                //     success: function(res){
-                //         if(!res.status){
-                //             $('#alert_msg').removeClass('d-none').removeClass('alert-success').addClass('alert-danger').html(res.message);
-                //         }else{
-                //             // $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
+                $.ajax({
+                    url: '/countries/'+form_data_id,
+                    method: 'PATCH',
+                    data: form_data,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(res){
+                        if(!res.status){
+                            $('.alert').removeClass('d-none').removeClass('alert-success').addClass('alert-danger').html(res.message);
+                        }else{
+                            // $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
 
-                //             var res_data = JSON.stringify(res.data);
-                //             var t_data = `
-                //                 <tr>
-                //                     <td>${res.data.id}</td>
-                //                     <td>${res.data.country_name}</td>
-                //                     <td>${res.data.capital_name}</td>
-                //                     <td>${res.data.population}</td>
-                //                     <td>
-                //                         <button class="btn btn-sm btn-info edit-country" data-bs-toggle="modal" data-bs-target="#editExampleModal" data-country='${res_data}''>Edit</button> |
-                //                         <button class="btn btn-sm btn-danger">Delete</button>
-                //                     </td>
-                //                 </tr>
-                //             `;
-                //             $('#country_t').append(t_data);
-                //             $('#country_form')[0].reset();
-                //             $('#exampleModal').modal('hide');
-                //         }
+                            // var res_data = JSON.stringify(res.data);
+                            // var t_data = `
+                            //     <tr>
+                            //         <td>${res.data.id}</td>
+                            //         <td>${res.data.country_name}</td>
+                            //         <td>${res.data.capital_name}</td>
+                            //         <td>${res.data.population}</td>
+                            //         <td>
+                            //             <button class="btn btn-sm btn-info edit-country" data-bs-toggle="modal" data-bs-target="#editExampleModal" data-country='${res_data}''>Edit</button> |
+                            //             <button class="btn btn-sm btn-danger">Delete</button>
+                            //         </td>
+                            //     </tr>
+                            // `;
+                            // $('#country_t').append(t_data);
+                            // $('#country_form')[0].reset();
+                            $('#editExampleModal').modal('hide');
+                            window.location.reload();
+                        }
 
-                //         alert_dismis();
-                //     },
-                //     error: function(res){
-                //         console.log(res);
-                //     }
-                // });
+                        alert_dismis();
+                    },
+                    error: function(res){
+                        console.log(res);
+                    }
+                });
                 
             });
 
@@ -307,7 +310,7 @@
 
             function alert_dismis(){
                 setTimeout(() => {
-                    $('#alert_msg').addClass('d-none');
+                    $('.alert').addClass('d-none');
                 }, 3000);
             }
 
