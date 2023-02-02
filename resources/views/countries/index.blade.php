@@ -36,7 +36,7 @@
                                 <td>{{$country->population}}</td>
                                 <td>
                                     <button class="btn btn-sm btn-info edit-country" data-bs-toggle="modal" data-bs-target="#editExampleModal" data-country="{{$country}}">Edit</button> |
-                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm btn-danger delete-country" data-delete="{{$country->id}}">Delete</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -144,7 +144,6 @@
 
             </form>
 
-
         </div>
     </div>
 </div>
@@ -194,12 +193,9 @@
             // ============= New Country insert ===================
             $('#country_form').submit(function(e){
                 e.preventDefault();
-
                 // var country_name = $('input[name="country_name"]').val();
                 // var capital_name = $('input[name="capital_name"]').val();
                 // var population = $('input[name="population"]').val();
-
-                // console.log(country_name, capital_name, population);
 
                 var form_data =  $('#country_form').serialize();
 
@@ -253,7 +249,7 @@
                 $('#editExampleModal form input[name="capital_name"]').val(country.capital_name);
                 $('#editExampleModal form input[name="population"]').val(country.population);
 
-                console.log($(this).data('country'));
+                // console.log($(this).data('country'));
                 
             });
 
@@ -276,23 +272,6 @@
                         if(!res.status){
                             $('.alert').removeClass('d-none').removeClass('alert-success').addClass('alert-danger').html(res.message);
                         }else{
-                            // $('#alert_msg').removeClass('d-none').removeClass('alert-danger').addClass('alert-success').html(res.message);
-
-                            // var res_data = JSON.stringify(res.data);
-                            // var t_data = `
-                            //     <tr>
-                            //         <td>${res.data.id}</td>
-                            //         <td>${res.data.country_name}</td>
-                            //         <td>${res.data.capital_name}</td>
-                            //         <td>${res.data.population}</td>
-                            //         <td>
-                            //             <button class="btn btn-sm btn-info edit-country" data-bs-toggle="modal" data-bs-target="#editExampleModal" data-country='${res_data}''>Edit</button> |
-                            //             <button class="btn btn-sm btn-danger">Delete</button>
-                            //         </td>
-                            //     </tr>
-                            // `;
-                            // $('#country_t').append(t_data);
-                            // $('#country_form')[0].reset();
                             $('#editExampleModal').modal('hide');
                             window.location.reload();
                         }
@@ -305,6 +284,30 @@
                 });
                 
             });
+
+
+             // ============= Delete Country ===================
+             $('body').on('click', '.delete-country', function(e){
+                e.preventDefault();
+
+                var row = $(this).parent().parent();
+                var form_data_id = $(this).data('delete');
+                console.log(form_data_id);
+
+                $.ajax({
+                    url: '/countries/'+form_data_id,
+                    method: 'DELETE',
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(res){
+                       row.fadeOut(500);
+                    },
+                    error: function(res){
+                        console.log(res);
+                    }
+                });
+                
+            });
+
 
 
 

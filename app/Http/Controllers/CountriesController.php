@@ -116,6 +116,9 @@ class CountriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $country = Country::find($id);
+        $country->delete();
+
+        return ['status' => true, 'message' => 'Country Delete success'];
     }
 }
