@@ -225,6 +225,7 @@
                             `;
                             $('#country_t').append(t_data);
                             $('#country_form')[0].reset();
+                            window.location.reload();
                             $('#exampleModal').modal('hide');
                         }
 
